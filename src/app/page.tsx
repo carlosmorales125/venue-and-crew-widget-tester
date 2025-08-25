@@ -1,7 +1,6 @@
 "use client";
 
 import Script from "next/script";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -104,16 +103,15 @@ export default function Home() {
         </p>
       </div>
 
-      <Link href={`${laravelAppUrl}/widget/widget.css`} type="stylesheet" />
-      <div
-        id="venue-and-crew-widget"
-        data-venue-id={currentVenueId}
-        data-button-mode="false"
-      ></div>
-      <Script
-        src={`${laravelAppUrl}/widget.js?v=1.0.1`}
-        strategy="afterInteractive"
-      />
+      {currentVenueId && (
+        <Script
+          src={`${laravelAppUrl}/widget.js?v=${Date.now()}`}
+          strategy="afterInteractive"
+          data-venue-id={currentVenueId}
+          data-dark-mode="false"
+          data-button-mode="false"
+        />
+      )}
     </main>
   );
 }
